@@ -12,7 +12,7 @@ if(isset($SETTING_ALLOWED_HOSTS))
 /**
  * AJAX Cross Domain (PHP) Proxy 0.8
  *    by Iacovos Constantinou (http://www.iacons.net)
- * 
+ *
  * Released under CC-GNU GPL
  */
 
@@ -86,11 +86,13 @@ if ( 'GET' == $request_method ) {
 	$request_params = null;
 }
 
-// Get URL from `csurl` in GET or POST data, before falling back to X-Proxy-URL header.
+// Get URL from `csurl` in GET or POST data, before falling back to X-Proxy-URL header or $PROXY_URL config.
 if ( isset( $_REQUEST['csurl'] ) ) {
     $request_url = urldecode( $_REQUEST['csurl'] );
 } else if ( isset( $_SERVER['HTTP_X_PROXY_URL'] ) ) {
     $request_url = urldecode( $_SERVER['HTTP_X_PROXY_URL'] );
+} else if (isset($PROXY_URL)) {
+    $request_url = urldecode( $PROXY_URL . $_SERVER['REQUEST_URI'] );
 } else {
     header( $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     header( 'Status: 404 Not Found' );

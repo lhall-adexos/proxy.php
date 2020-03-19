@@ -13,6 +13,8 @@ HOW-TO:
 
 Send request to your script and set query parametr `csurl` to desired URL with its schema.
 
+Alternatively, you can use it as a full proxy by defining the forwarding URL in the config file with the $PROXY_URL value.
+
 Example:
 
 `https://proxy.xyz.com/proxy.php?csurl=https://github.com`
